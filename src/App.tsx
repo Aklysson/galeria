@@ -1,47 +1,47 @@
-import {useEffect, useState} from 'react'
-import { Api } from './api'
+import { useEffect, useState } from "react";
+import { Api } from "./api";
+import { Link } from "./components/Link";
 
 type Props = {
-  albumId: number,
-  id: number,
-  title: string,
-  url: string,
-  thumbnailUrl: string
-}
+  albumId: number;
+  id: number;
+  title: string;
+  url: string;
+  thumbnailUrl: string;
+};
 
 function App() {
+  const [galery, setGalery] = useState<Props[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const [galery,setGalery] = useState<Props[]>([])
-  const [loading,setLoading] = useState<boolean>(false)
+  const requisi = async () => {
+    const json = await Api.requisi();
+    setGalery(json);
+    setLoading(true);
+  };
 
-const requisi = async() => {
-const json = await Api.requisi()
-setGalery(json)
-setLoading(true)
-}
+  useEffect(() => {
+    requisi();
+  }, []);
 
-useEffect(() => {
-  requisi()
-},[])
-
-return (
-   <>
-    {loading && <div>
+  return (
+    <>
       <h1>Galeria de Fotos</h1>
       <hr />
-      <p>{galery.map((e) => (
+      {loading && (
         <div>
-        <p>{e.title}</p>
-        <img src={e.url}></img>
+          <p>
+            {galery.map((e) => (
+              <div>
+                <Link content={e.title} />
+              </div>
+            ))}
+          </p>
         </div>
-      ))}</p>
-      
-    </div>}
-    {
-     !loading && <p>Carregando...</p>
-     }
-   </>
-  )
+      )}
+      {!loading && <p>Carregando...</p>}
+    </>
+  );
 }
 
 export default App;
