@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { Api } from "./api";
+import { Home } from "./pages/home";
 import { Link } from "./components/Link";
+import { ColorPage } from "./pages/colorpage";
+import * as C from './Main'
+import { Routes } from "./Routes/MainRoutes";
 
 type Props = {
   albumId: number;
@@ -27,19 +31,12 @@ function App() {
   return (
     <>
       <h1>Galeria de Fotos</h1>
-      <hr />
-      {loading && (
-        <div>
-          <p>
-            {galery.map((e) => (
-              <div>
-                <Link content={e.title} />
-              </div>
-            ))}
-          </p>
-        </div>
-      )}
+      <hr />  
       {!loading && <p>Carregando...</p>}
+      {loading &&
+      <Routes />
+      }
+      
     </>
   );
 }
