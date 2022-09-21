@@ -6,8 +6,12 @@ const https = axios.create({
 
 export const Api = {     
      requisi : async() => {
-            const req = await https.get('/photos')
+            const req = await https.get(`/photos`)
             return req.data
-            }
+            },
+    requisçao : async(id:number) => {
+                const req = await https.get(`/photos/${id}`)
+                return req.data
+                }
     
 }

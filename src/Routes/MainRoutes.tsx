@@ -9,7 +9,7 @@ export function Routes() {
     return useRoutes([
         { path:'/', element: <Home /> },
         { path:'/color', element: <ColorPage />},
-        { path: '/album/:id', element: <AboutItem />}
+        { path: '/albuns/:id', element: <AboutItem />}
        
     ])
 }

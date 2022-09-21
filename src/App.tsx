@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Api } from "./api";
 import { Home } from "./pages/home";
-import { Link } from "./components/Link";
 import { ColorPage } from "./pages/colorpage";
 import * as C from './Main'
 import { Routes } from "./Routes/MainRoutes";
@@ -32,11 +31,12 @@ function App() {
     <>
       <h1>Galeria de Fotos</h1>
       <hr />  
+      <C.Container>
       {!loading && <p>Carregando...</p>}
       {loading &&
       <Routes />
       }
-      
+        </C.Container>
     </>
   );
 }

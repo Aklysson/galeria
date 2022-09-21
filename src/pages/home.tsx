@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "../../components/Link";
-import { Api } from "../../api";
-
-
+import { Link } from "react-router-dom";
+import { Api } from "../api";
+import * as C from '../Main'
 
 export function Home() {
 
@@ -17,23 +16,21 @@ export function Home() {
       
 const [galery, setGalery] = useState<Props[]>([]);
 
-const requisi = async () => {
+const requisis = async () => {
     const json = await Api.requisi();
     setGalery(json);
   };
 
   useEffect(() => {
-    requisi()
+    requisis()
   },[])
     return (
         <>
-          <p>
             {galery.map((e) => (
-              <div>
-                <Link content={e.title} onclick={e} />
-              </div>
-        ))}
-       </p>   
+              <C.Link>
+                <Link to={`/albuns/${e.id}`}>{e.title}</Link>
+              </C.Link>
+        ))}  
     </>
     )
 }
